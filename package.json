@@ -1,0 +1,31 @@
+{
+  "name": "lab2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^3.0.8",
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "express-sanitizer": "^1.0.5",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.4.0",
+    "lodash": "^4.17.15",
+    "lodash.capitalize": "^4.2.1",
+    "moment": "^2.24.0",
+    "momentjs": "^2.0.0",
+    "mongodb": "^3.5.2",
+    "mongoose": "^5.9.7",
+    "mysql": "^2.17.1",
+    "postman": "^0.2.0",
+    "request": "^2.88.2",
+    "uid-safe": "^2.1.5"
+  }
+}

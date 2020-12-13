@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeBank &raquo; Recipes</title>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>RecipeBank</h1>
+        <a href="/">Home</a>
+        <a href="/recipes"><b>View Recipes</b></a>
+        <a href="/recipe/new"> Add Recipe</a>
+      </nav>
+      <div class="auth">
+        <% if (loggedIn) { %>
+        <a href="/auth/logout">Logout</a>
+        <% } else { %>
+        <a href="/auth">Login</a>
+        <a href="/register">Register</a>
+        <% } %>
+      </div>
+    </header>
+    <main>
+      <!-- List recipes using forEach loop -->
+      <% recipes.forEach(recipe => { %>
+      <div class="recipe">
+        <h2><a href="/recipe/<%= recipe._id %>"><%= recipe.title %></a></h2>
+        <p>
+          <%= recipe.difficulty %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= recipe.duration
+          %> Min&nbsp;&nbsp;|&nbsp;&nbsp;<%= recipe.ingredients.length %>
+          Ingredients
+        </p>
+        <p>by <b><%= recipe.creator.username %></b> <%= recipe.createdOn %></p>
+      </div>
+      <% }) %>
+    </main>
+  </body>
+</html>

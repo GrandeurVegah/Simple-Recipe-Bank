@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeBank &raquo; New Recipe</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>RecipeBanks</h1>
+      <a href="/">Home</a>
+      <a href="/recipes">View Recipes</a>
+      <a href="/recipe/new"><b> Add Recipe</b></a>
+    </nav>
+    <div class="auth">
+      <a href="/auth/logout">Logout</a>
+    </div>
+  </header>
+  <main>
+    <!-- Set POST route based on if the form is used for updating a recipe or uploading new recipes -->
+    <% if (update) { %>
+      <form action="/recipe/<%= data._id %>/update" method="POST">
+        <h2>Update Recipe</h2>
+    <% } else { %>
+      <form action="/recipe/new" method="POST">
+        <h2>New Recipe</h2>
+    <% } %>
+      <!-- Each input checks if data for the field is passed into the EJS render function -->
+      <!-- If data is present it is filled in the value or selected as a select option -->
+      <div class="form-input">
+        <input type="text" id="title" name="title" placeholder="Title" autocomplete="off" value="<% if (data.title !== undefined) { %><%= data.title %><% } %>">
+        <label for="title">Title:</label>
+        <p></p>
+      </div>
+      <div class="form-input">
+        <select name="difficulty" id="difficulty" value="<% if (data.difficulty !== undefined) { %><%= data.difficulty %><% } else { %>Medium<% } %>">
+          <option value="Easy"  <% if (data.difficulty !== undefined && data.difficulty == 'Easy') { %>selected<% } %>>Easy</option>
+          <option value="Medium" <% if (data.difficulty !== undefined && data.difficulty == 'Medium') { %>selected<% } %>>Medium</option>
+          <option value="Hard" <% if (data.difficulty !== undefined && data.difficulty == 'Hard') { %>selected<% } %>>Hard</option>
+        </select>
+        <label for="difficulty">Difficulty:</label>
+        <p></p>
+      </div>
+      <div class="form-input">
+        <input type="number" id="duration" name="duration" placeholder="Time (in min)" autocomplete="off" value="<% if (data.duration !== undefined) { %><%= data.duration %><% } %>">
+        <label for="title">Duration (time in minutes):</label>
+        <p></p>
+      </div>
+      <div class="form-input" id="ingredients" name="ingredients">
+        <label for="ingredients">Ingredients:</label>
+        <!-- Ingredient divs are created based on the ingredients data provided -->
+        <% if (data.ingredients !== undefined && data.ingredients.length > 0) { %>
+          <% data.ingredients.forEach((ingredient, index) => { %>
+            <div class="ingredient">
+              <input type="text" name="ingredients[<%= index %>][name]" placeholder="Name" autocomplete="off" value="<% if (ingredient.name !== undefined) { %><%= ingredient.name %><% } %>">
+              <input type="number" name="ingredients[<%= index %>][amount]" placeholder="Amount" autocomplete="off" value="<% if (ingredient.amount !== undefined) { %><%= ingredient.amount %><% } %>">
+              <input type="text" name="ingredients[<%= index %>][unit]" placeholder="Unit" autocomplete="off" value="<% if (ingredient.unit !== undefined) { %><%= ingredient.unit %><% } %>">
+              <% if (index > 0) { %>
+                <button type="button" onclick="this.parentElement.remove(); checkIngredientLimit()">╳</button>
+              <% } %>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="ingredient">
+            <input type="text" name="ingredients[0][name]" placeholder="Name" autocomplete="off">
+            <input type="number" name="ingredients[0][amount]" placeholder="Amount" autocomplete="off">
+            <input type="text" name="ingredients[0][unit]" placeholder="Unit" autocomplete="off">
+          </div>
+        <% } %>
+        <button type="button" onclick="addIngredient()">+ Add Ingredient</button>
+        <p></p>
+      </div>
+      <div class="form-input">
+        <textarea name="description" id="description" placeholder="Description"><% if (data.description !== undefined) { %><%= data.description %><% } %></textarea>
+        <label for="description">Description:</label>
+        <p></p>
+      </div>
+      <!-- Errors are dynamically shown if they are provided during the EJS render -->
+      <% if (errors !== undefined) { %>
+        <div class="errors">
+          <% errors.forEach(error => { %>
+            <p><%= error.message %></p>
+          <% }) %>
+        </div>
+      <% } %>
+      <div class="form-input">
+        <input type="submit" class="btn-blue" value="Submit"/>
+      </div>
+    </form>
+  </main>
+  <!-- JS -->
+  <script>
+    // Function: hide and show "Add Ingredient" button based on amount of ingredients shown
+    function checkIngredientLimit () {
+      if (document.querySelectorAll('#ingredients > .ingredient').length <= 12) {
+        document.querySelector('#ingredients > button').style.display = 'block'
+      } else {
+        document.querySelector('#ingredients > button').style.display = 'none'
+      }
+    }
+
+    // Function: Inject ingredient div / inputs
+    function addIngredient (e) {
+      document.querySelector('#ingredients > button').insertAdjacentHTML('beforebegin', `
+        <div class="ingredient">
+          <input type="text" name="ingredients[${document.querySelectorAll('#ingredients > .ingredient').length}][name]" placeholder="Name" autocomplete="off">
+          <input type="number" name="ingredients[${document.querySelectorAll('#ingredients > .ingredient').length}][amount]" placeholder="Amount" autocomplete="off">
+          <input type="text" name="ingredients[${document.querySelectorAll('#ingredients > .ingredient').length}][unit]" placeholder="Unit" autocomplete="off">
+          <button type="button" onclick="this.parentElement.remove(); checkIngredientLimit()">╳</button>
+        </div>
+      `)
+      checkIngredientLimit()
+    }
+  </script>
+</body>
+</html>
+

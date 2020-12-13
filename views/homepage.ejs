@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeBank &raquo; Home</title>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Recipe Bank</h1>
+        <a href="/"><b>Home</b></a>
+        <a href="/recipes">View Recipes</a>
+        <a href="/recipe/new">Add Recipe</a>
+      </nav>
+      <div class="auth">
+        <% if (loggedIn) { %>
+        <a href="/auth/logout">Logout</a>
+        <% } else { %>
+        <a href="/auth">Login</a>
+        <a href="/register">Register</a>
+        <% } %>
+      </div>
+    </header>
+    <main class="center">
+      <h1>RecipeBank</h1>
+    </main>
+  </body>
+</html>

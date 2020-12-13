@@ -1,0 +1,26 @@
+Example app listening on port 8000!
+Connected to database
+ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect decimal value: 'price' for column 'price' at row 1
+ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect decimal value: 'price' for column 'price' at row 1
+events.js:187
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/jolum001/lab3/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/jolum001/lab3/node_modules/mysql/lib/Connection.js:97:28)
+    at Socket.<anonymous> (/home/jolum001/lab3/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:215:7)
+    at endReadableNT (_stream_readable.js:1183:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+Emitted 'error' event on Connection instance at:
+    at Connection._handleProtocolError (/home/jolum001/lab3/node_modules/mysql/lib/Connection.js:426:8)
+    at Protocol.emit (events.js:210:5)
+    at Protocol._delegateError (/home/jolum001/lab3/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+    at Protocol.end (/home/jolum001/lab3/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+    at Socket.<anonymous> (/home/jolum001/lab3/node_modules/mysql/lib/Connection.js:97:28)
+    [... lines matching original stack trace ...]
+    at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+  fatal: true,
+  code: 'PROTOCOL_CONNECTION_LOST'
+}

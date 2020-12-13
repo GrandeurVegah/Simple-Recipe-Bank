@@ -1,0 +1,54 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeBank &raquo; <%= title %></title>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>RecipeBank</h1>
+        <a href="/">Home</a>
+        <a href="/recipes"><b>View Recipes</b></a>
+        <a href="/recipe/new"> Add Recipe</a>
+      </nav>
+      <div class="auth">
+        <% if (loggedIn) { %>
+        <a href="/auth/logout">Logout</a>
+        <% } else { %>
+        <a href="/auth">Login</a>
+        <a href="/register">Register</a>
+        <% } %>
+      </div>
+    </header>
+    <main class="recipe-details">
+      <a href="/recipes">← Back to recipe list</a>
+      <h2><%= title %></h2>
+      <p>Posted by <b><%= creator.username %></b> <%= createdOn %></p>
+      <h3>Difficulty:</h3>
+      <p><%= difficulty %></p>
+      <h3>Duration:</h3>
+      <p><%= duration %> Minutes</p>
+      <h3>Ingredients:</h3>
+      <ul>
+        <% ingredients.forEach(ingredient => { %>
+        <li>
+          <% if (ingredient.amount) { %><%= ingredient.amount %> <% } if
+          (ingredient.unit) { %><%= ingredient.unit %> <% } %><%=
+          ingredient.name %>
+        </li>
+        <% }) %>
+      </ul>
+      <h3>Description:</h3>
+      <p><%- description %></p>
+      <% if (createdByCurrentUser) { %>
+      <div class="actions">
+        <a href="./<%= _id %>/update" class="btn btn-blue">Update</a>
+        <a href="./<%= _id %>/delete" class="btn btn-red">Delete</a>
+      </div>
+      <% } %>
+    </main>
+  </body>
+</html>

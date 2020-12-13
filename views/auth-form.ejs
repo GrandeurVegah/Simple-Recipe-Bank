@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeBank &raquo; Login</title>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>RecipeBank</h1>
+        <a href="/">Home</a>
+        <a href="/recipes">View Recipes</a>
+        <a href="/recipe/new"> Add Recipe</a>
+      </nav>
+      <div class="auth">
+        <% if (register) { %>
+        <a href="/auth">Login</a>
+        <a href="/register"><b>Register</b></a>
+        <% } else { %>
+        <a href="/auth"><b>Login</b></a>
+        <a href="/register">Register</a>
+        <% } %>
+      </div>
+    </header>
+    <main>
+      <form action="/auth" method="POST">
+        <h2><% if (register) { %>Register<% } else { %>Login<% } %></h2>
+        <input
+          type="hidden"
+          name="type"
+          value="<% if (register) { %>register<% } else { %>login<% } %>"
+        />
+        <div class="form-input">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            autocomplete="off"
+            value="<% if (data.username !== undefined) { %><%= data.username %><% } %>"
+          />
+          <label for="username">Username:</label>
+          <p></p>
+        </div>
+        <div class="form-input">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="off"
+          />
+          <label for="password">Password:</label>
+          <p></p>
+        </div>
+        <% if (errors !== undefined) { %>
+        <div class="errors">
+          <% errors.forEach(error => { %>
+          <p><%= error.message %></p>
+          <% }) %>
+        </div>
+        <% } %>
+        <div class="form-input">
+          <input type="submit" class="btn-blue" value="Submit" />
+        </div>
+      </form>
+      <% if (register) { %>
+      <p>Already have an account? <a href="/auth">Login</a></p>
+      <% } else { %>
+      <p>Don't have an account? <a href="/register">Register</a></p>
+      <% } %>
+    </main>
+  </body>
+</html>

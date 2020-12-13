@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Bank &raquo; Recipes</title>
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Recipe Bank</h1>
+      <a href="/">Home</a>
+      <% if (type === 'Recipe') { %>
+        <a href="/recipes"><b>Recipes</b></a>
+      <% } else { %>
+        <a href="/recipes">View Recipes</a>
+      <% } %>
+      <a href="/recipe/new"> Add Recipe</a>
+    </nav>
+    <div class="auth">
+      <% if (loggedIn) { %>
+        <a href="/auth/logout">Logout</a>
+      <% } else { %>
+        <a href="/auth">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </div>
+  </header>
+  <main class="center">
+    <br/>
+    <h1>Please Login</h1>
+  </maini>
+</body>
+</html>
+
